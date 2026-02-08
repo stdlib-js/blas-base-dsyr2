@@ -35,32 +35,38 @@ limitations under the License.
 
 > Perform the symmetric rank 2 operation `A = α*x*y^T + α*y*x^T + A`.
 
-<section class="installation">
 
-## Installation
-
-```bash
-npm install @stdlib/blas-base-dsyr2
-```
-
-Alternatively,
-
--   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
--   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
--   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
-
-The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
-
-To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
-
-</section>
 
 <section class="usage">
 
 ## Usage
 
+To use in Observable,
+
 ```javascript
-var dsyr2 = require( '@stdlib/blas-base-dsyr2' );
+dsyr2 = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-base-dsyr2@umd/browser.js' )
+```
+
+To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
+
+```javascript
+var dsyr2 = require( 'path/to/vendor/umd/blas-base-dsyr2/index.js' )
+```
+
+To include the bundle in a webpage,
+
+```html
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/blas-base-dsyr2@umd/browser.js"></script>
+```
+
+If no recognized module system is present, access bundle contents via the global scope:
+
+```html
+<script type="text/javascript">
+(function () {
+    window.dsyr2;
+})();
+</script>
 ```
 
 #### dsyr2( order, uplo, N, α, x, sx, y, sy, A, LDA )
@@ -180,10 +186,15 @@ dsyr2.ndarray( 'upper', 3, 1.0, x, -2, 4, y, 1, 0, A, 3, 1, 0 );
 
 <!-- eslint no-undef: "error" -->
 
-```javascript
-var discreteUniform = require( '@stdlib/random-array-discrete-uniform' );
-var ones = require( '@stdlib/array-ones' );
-var dsyr2 = require( '@stdlib/blas-base-dsyr2' );
+```html
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/random-array-discrete-uniform@umd/browser.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/array-ones@umd/browser.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/blas-base-dsyr2@umd/browser.js"></script>
+<script type="text/javascript">
+(function () {
 
 var opts = {
     'dtype': 'float64'
@@ -204,6 +215,11 @@ console.log( A1 );
 
 dsyr2.ndarray( 'upper', 3, 1.0, x, 1, 0, y, 1, 0, A2, 3, 1, 0 );
 console.log( A2 );
+
+})();
+</script>
+</body>
+</html>
 ```
 
 </section>
@@ -212,166 +228,7 @@ console.log( A2 );
 
 <!-- C interface documentation. -->
 
-* * *
 
-<section class="c">
-
-## C APIs
-
-<!-- Section to include introductory text. Make sure to keep an empty line after the intro `section` element and another before the `/section` close. -->
-
-<section class="intro">
-
-</section>
-
-<!-- /.intro -->
-
-<!-- C usage documentation. -->
-
-<section class="usage">
-
-### Usage
-
-```c
-#include "stdlib/blas/base/dsyr2.h"
-```
-
-#### c_dsyr2( order, uplo, N, alpha, \*X, sx, \*Y, sy, \*A, LDA )
-
-Performs the symmetric rank 2 operation `A = α*x*y^T + α*y*x^T + A` where `α` is a scalar, `x` and `y` are `N` element vectors, and `A` is an `N` by `N` symmetric matrix.
-
-```c
-#include "stdlib/blas/base/shared.h"
-
-double A[] = { 1.0, 2.0, 3.0, 2.0, 1.0, 2.0, 3.0, 2.0, 1.0 };
-const double x[] = { 1.0, 2.0, 3.0 };
-const double y[] = { 1.0, 2.0, 3.0 };
-
-c_dsyr2( CblasColMajor, CblasUpper, 3, 1.0, x, 1, y, 1, A, 3 );
-```
-
-The function accepts the following arguments:
-
--   **order**: `[in] CBLAS_LAYOUT` storage layout.
--   **uplo**: `[in] CBLAS_UPLO` specifies whether the upper or lower triangular part of the symmetric matrix `A` should be referenced.
--   **N**: `[in] CBLAS_INT` number of elements along each dimension of `A`.
--   **alpha**: `[in] double` scalar constant.
--   **X**: `[in] double*` first input array.
--   **strideX**: `[in] CBLAS_INT` stride length for `X`.
--   **Y**: `[in] double*` second input array.
--   **strideY**: `[in] CBLAS_INT` stride length for `Y`.
--   **A**: `[inout] double*` input matrix.
--   **LDA**: `[in] CBLAS_INT` stride of the first dimension of `A` (a.k.a., leading dimension of the matrix `A`).
-
-```c
-void c_dsyr2( const CBLAS_LAYOUT order, const CBLAS_UPLO uplo, const CBLAS_INT N, const double alpha, const double *X, const CBLAS_INT strideX, const double *Y, const CBLAS_INT strideY, double *A, const CBLAS_INT LDA )
-```
-
-<!-- lint disable maximum-heading-length -->
-
-#### c_dsyr2_ndarray( uplo, N, alpha, \*X, sx, ox, \*Y, sy, oy, \*A, sa1, sa2, oa )
-
-Performs the symmetric rank 2 operation `A = α*x*y^T + α*y*x^T + A`, using alternative indexing semantics and where `α` is a scalar, `x` and `y` are `N` element vectors, and `A` is an `N` by `N` symmetric matrix.
-
-```c
-#include "stdlib/blas/base/shared.h"
-
-double A[] = { 1.0, 2.0, 3.0, 2.0, 1.0, 2.0, 3.0, 2.0, 1.0 };
-const double x[] = { 1.0, 2.0, 3.0 };
-const double y[] = { 1.0, 2.0, 3.0 };
-
-c_dsyr2_ndarray( CblasUpper, 3, 1.0, x, 1, 0, y, 1, 0, A, 3, 1, 0 );
-```
-
-The function accepts the following arguments:
-
--   **uplo**: `[in] CBLAS_UPLO` specifies whether the upper or lower triangular part of the symmetric matrix `A` should be referenced.
--   **N**: `[in] CBLAS_INT` number of elements along each dimension of `A`.
--   **alpha**: `[in] double` scalar constant.
--   **X**: `[in] double*` first input array.
--   **sx**: `[in] CBLAS_INT` stride length for `X`.
--   **ox**: `[in] CBLAS_INT` starting index for `X`.
--   **Y**: `[in] double` second input array.
--   **sy**: `[in] CBLAS_INT` stride length for `Y`.
--   **oy**: `[in] CBLAS_INT` starting index for `Y`.
--   **A**: `[inout] double*` input matrix.
--   **sa1**: `[in] CBLAS_INT` stride of the first dimension of `A`.
--   **sa2**: `[in] CBLAS_INT` stride of the second dimension of `A`.
--   **oa**: `[in] CBLAS_INT` starting index for `A`.
-
-```c
-void c_dsyr2_ndarray( const CBLAS_UPLO uplo, const CBLAS_INT N, const double alpha, const double *X, const CBLAS_INT strideX, const CBLAS_INT offsetX, const double *Y, CBLAS_INT strideY, const CBLAS_INT offsetY, double *A, const CBLAS_INT strideA1, const CBLAS_INT strideA2, const CBLAS_INT offsetA )
-```
-
-</section>
-
-<!-- /.usage -->
-
-<!-- C API usage notes. Make sure to keep an empty line after the `section` element and another before the `/section` close. -->
-
-<section class="notes">
-
-</section>
-
-<!-- /.notes -->
-
-<!-- C API usage examples. -->
-
-<section class="examples">
-
-### Examples
-
-```c
-#include "stdlib/blas/base/dsyr2.h"
-#include "stdlib/blas/base/shared.h"
-#include <stdio.h>
-
-int main( void ) {
-    // Define 3x3 symmetric matrices stored in row-major layout:
-    double A1[ 3*3 ] = {
-        1.0, 2.0, 3.0,
-        2.0, 1.0, 2.0,
-        3.0, 2.0, 1.0
-    };
-
-    double A2[ 3*3 ] = {
-        1.0, 2.0, 3.0,
-        2.0, 1.0, 2.0,
-        3.0, 2.0, 1.0
-    };
-
-    // Define `x` and `y` vectors:
-    const double x[ 3 ] = { 1.0, 2.0, 3.0 };
-    const double y[ 3 ] = { 1.0, 2.0, 3.0 };
-
-    // Specify the number of elements along each dimension of `A1` and `A2`:
-    const int N = 3;
-
-    // Perform the symmetric rank 2 operation `A = α*x*y^T + α*y*x^T + A`:
-    c_dsyr2( CblasColMajor, CblasUpper, N, 1.0, x, 1, y, 1, A1, N );
-
-    // Print the result:
-    for ( int i = 0; i < N*N; i++ ) {
-        printf( "A1[ %i ] = %lf\n", i, A1[ i ] );
-    }
-
-    // Perform the symmetric rank 2 operation `A = α*x*y^T + α*y*x^T + A` using alternative indexing semantics:
-    c_dsyr2_ndarray( CblasUpper, N, 1.0, x, 1, 0, y, 1, 0, A2, N, 1, 0 );
-
-    // Print the result:
-    for ( int i = 0; i < N*N; i++ ) {
-        printf( "A2[ %i ] = %lf\n", i, A2[ i ] );
-    }
-}
-```
-
-</section>
-
-<!-- /.examples -->
-
-</section>
-
-<!-- /.c -->
 
 <!-- Section for related `stdlib` packages. Do not manually edit this section, as it is automatically populated. -->
 
