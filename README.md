@@ -42,6 +42,11 @@ limitations under the License.
 ## Usage
 
 ```javascript
+import dsyr2 from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-base-dsyr2@esm/index.mjs';
+```
+The previous example will load the latest bundled code from the esm branch. Alternatively, you may load a specific version by loading the file from one of the [tagged bundles](https://github.com/stdlib-js/blas-base-dsyr2/tags). For example,
+
+```javascript
 import dsyr2 from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-base-dsyr2@v0.1.1-esm/index.mjs';
 ```
 
@@ -170,7 +175,7 @@ dsyr2.ndarray( 'upper', 3, 1.0, x, -2, 4, y, 1, 0, A, 3, 1, 0 );
 
 import discreteUniform from 'https://cdn.jsdelivr.net/gh/stdlib-js/random-array-discrete-uniform@esm/index.mjs';
 import ones from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-ones@esm/index.mjs';
-import dsyr2 from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-base-dsyr2@v0.1.1-esm/index.mjs';
+import dsyr2 from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-base-dsyr2@esm/index.mjs';
 
 var opts = {
     'dtype': 'float64'
