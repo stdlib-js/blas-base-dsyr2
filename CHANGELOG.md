@@ -2,9 +2,56 @@
 
 > Package changelog.
 
-<section class="release" id="v0.0.1">
+<section class="release" id="unreleased">
 
-## 0.0.1 (2026-02-08)
+## Unreleased (2026-02-18)
+
+<section class="issues">
+
+### Closed Issues
+
+This release closes the following issue:
+
+[#10285](https://github.com/stdlib-js/stdlib/issues/10285)
+
+</section>
+
+<!-- /.issues -->
+
+<section class="commits">
+
+### Commits
+
+<details>
+
+-   [`d7c9e82`](https://github.com/stdlib-js/stdlib/commit/d7c9e8257ce6c5eead817a24a26556c3efb62cf8) - **test:** remove empty line between require statements in `test.dsyr2.js` [(#10288)](https://github.com/stdlib-js/stdlib/pull/10288) _(by Lakshmi Sravya Vedantham, lakshmisravya123)_
+
+</details>
+
+</section>
+
+<!-- /.commits -->
+
+<section class="contributors">
+
+### Contributors
+
+A total of 2 people contributed to this release. Thank you to the following contributors:
+
+-   Lakshmi Sravya Vedantham
+-   lakshmisravya123
+
+</section>
+
+<!-- /.contributors -->
+
+</section>
+
+<!-- /.release -->
+
+<section class="release" id="v0.1.1">
+
+## 0.1.1 (2026-02-08)
 
 <section class="features">
 
